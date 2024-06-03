@@ -1,18 +1,53 @@
+<h1 align="center"><b>E-Wallet App</b></h1>
+
 ## Getting Started
+### Overview:
+Welcome to the My App eWallet project. This is my first project that I created in Java by applying the concept of Object-Oriented Programming (OOP).
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Ewallet app is a simple CLI-based application with the following features:
+- Adding account data
+- Create an ewallet
+- Make transactions, in the form of top ups and transfers
 
-## Folder Structure
+### Tasks:
+- Create a simple CLI-based application to accommodate the features above.
+- Applying the OOP principles that I have learned in Java class.
 
-The workspace contains two folders by default, where:
+> Thank you to Mr [Fakhry Ikhsan Firdaus](https://github.com/iffakhry) for his knowledge. 😉
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Data Structure
+1. Class `Customer`:
+- Attributes: name, address, ewallet
+- Methods: setter getter for name and ewallet.
+2. Class `EWallet`:
+- Attribute: balance, listTransaction
+- Methods: constructor, set get balance, check balance, topup, transfer
+3. Abstract Class `Transaction`:
+- Attribute: nominal, date, customer.
+- Methods: constructor, set get for nominal, date, customer. Abstract method prints transaction information.
+4. Class `Topup` which inherits to `Transaction`:
+- Attributes: reference number, payment method
+- Methods: setter getter, constructor, override print transaction information
+5. Class `Transfer` which inherits to `Transaction`:
+- Attributes: sending customer, recipient
+- Methods: constructor, setter, getter, override print transaction information
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Usage
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+1. Clone the repository:
 
-## Dependency Management
+    ```bash
+    git clone https://github.com/BAGIR3008/ewallet-app-java.git
+    ```
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+2. Navigate to the project directory:
+    
+    ```bash
+    cd ewallet-app-java
+    ```
+
+3. Run the application:
+
+    ```bash
+    java src/AppMain.java
+    ```
