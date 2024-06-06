@@ -2,9 +2,9 @@ public class Transfer extends Transaction{
     private Customer sender;
     private Customer recipient;
 
-    Transfer(int nominal, Customer recipient) {
+    Transfer(int nominal, Customer sender, Customer recipient) {
         super(nominal);
-        this.sender = super.getCustomer();
+        this.sender = sender;
         this.recipient = recipient;
     }
 

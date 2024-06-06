@@ -10,8 +10,8 @@ public class EWallet {
         this.eWalletName = eWalletName;
     }
 
-    public void setSaldo(int saldo) {
-        this.saldo = saldo;
+    public void setEWalletName(String eWalletName) {
+        this.eWalletName = eWalletName;
     }
 
     public String getEWalletName() {
@@ -24,7 +24,6 @@ public class EWallet {
     
     public void cekSaldo() {
         System.out.println("-----[Check Balance]-----");
-        // System.out.println("Ownler             : " + this.);
         System.out.println("eWallet Name       : " + this.eWalletName);
         System.out.println("Balance            : " + this.saldo);
         System.out.println("Total Transactions : " + this.listTransactions.size());
@@ -35,19 +34,37 @@ public class EWallet {
         return listTransactions;
     }
 
-    public Transaction getLastTransaction() {
-        return listTransactions.get(listTransactions.size()-1);
+    public void displayLastTransaction() {
+        if (listTransactions == null) {
+            System.out.println("No Transaction History");
+            return;
+        }
+
+        listTransactions.get(listTransactions.size()-1).displayDetail();;
     }
 
-    public void topup(Topup t) {
-        this.listTransactions.add(t);
-        this.saldo += t.getNominal();
+    public Boolean topup(int nominal, String referenceNumber, String paymentMethod) {
+        if (nominal < 1 || referenceNumber == "" || paymentMethod == "") {
+            return false;
+        }
+
+        Topup topup = new Topup(nominal, referenceNumber, paymentMethod);
+        this.listTransactions.add(topup);
+        this.saldo += nominal;
+        return true;
     }
 
-    public void transfer(Transfer t) {
-        this.listTransactions.add(t);
-        this.saldo -= t.getNominal();
-        t.getRecipient().eWallet.receiveTransfer(t);;
+    public Boolean transfer(int nominal, Customer sender, Customer recipient) {
+        if (sender == null || recipient == null ||
+            nominal < 1 || sender.getEWallet().getSaldo() < nominal) {
+            return false;
+        }
+
+        Transfer transfer = new Transfer(nominal, sender, recipient);
+        this.listTransactions.add(transfer);
+        this.saldo -= nominal;
+        recipient.getEWallet().receiveTransfer(transfer);
+        return true;
     }
 
     public void receiveTransfer(Transfer t) {

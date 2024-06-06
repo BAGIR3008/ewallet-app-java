@@ -1,7 +1,7 @@
 public class Customer {
     private String name;
     private String address;
-    public EWallet eWallet;
+    private EWallet eWallet = new EWallet("");
 
     public String getName() {
         return name;
@@ -25,5 +25,14 @@ public class Customer {
 
     public void setEWallet(EWallet eWallet) {
         this.eWallet = eWallet;
+    }
+
+    public void displayAccount() {
+        System.out.println("-----[Info Account]-----");
+        System.out.println("Owner Name    : " + this.name);
+        System.out.println("Owner Address : " + this.address);
+        System.out.println("eWallet Name  : " + this.eWallet.getEWalletName());
+        System.out.println("Balance       : " + this.eWallet.getSaldo());
+        System.out.println("------------------------");
     }
 }

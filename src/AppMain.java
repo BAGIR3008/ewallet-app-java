@@ -10,30 +10,32 @@ public class AppMain {
         Budi.setAddress("Jl. Mangroof 15");
 
 
-        // Andi & Budi Create EWallet
-        EWallet Andi_EWallet = new EWallet("Gopay");
-        Andi.setEWallet(Andi_EWallet);
-        
-        EWallet Budi_EWallet = new EWallet("Dana");
-        Budi.setEWallet(Budi_EWallet);
+        // Andi & Budi Set EWallet's name
+        Andi.getEWallet().setEWalletName("Gopay");
+        Budi.getEWallet().setEWalletName("Dana");
 
 
         // Andi & Budi Do Topup n' Display Topup Detail
-        Topup Andi_Topup1 = new Topup(2_000_000, "REF001", "Alfamaret");
-        Andi.eWallet.topup(Andi_Topup1);
-        Andi.eWallet.getLastTransaction().displayDetail();
+        Andi.getEWallet().topup(2_000_000, "REF001", "Alfamaret");
+        Andi.getEWallet().displayLastTransaction();
         
-        Topup Budi_Topup1 = new Topup(1_000_000, "REF002", "QRIS");
-        Budi.eWallet.topup(Budi_Topup1);
-        Budi.eWallet.getLastTransaction().displayDetail();
+        Budi.getEWallet().topup(1_000_000, "REF002", "QRIS");
+        Budi.getEWallet().displayLastTransaction();
 
 
         // Andi Transfer to Budi
-        Transfer transfer1 = new Transfer(500_000, Budi);
-        Andi.eWallet.transfer(transfer1);
+        Andi.getEWallet().transfer(500_000, Andi, Budi);
+        Andi.getEWallet().displayLastTransaction();
+        Budi.getEWallet().displayLastTransaction();
+
 
         // Andi n Budi do Check Balance
-        Andi.eWallet.cekSaldo();
-        Budi.eWallet.cekSaldo();
+        Andi.getEWallet().cekSaldo();
+        Budi.getEWallet().cekSaldo();
+        
+        
+        // Andi n Budi do Check Information Account
+        Andi.displayAccount();
+        Budi.displayAccount();
     }
 }
